@@ -1,6 +1,6 @@
 import axios from "axios";
 // const API_URL = "http://63f1-123-193-128-69.ngrok-free.app/picture";
-const API_URL = "http://127.0.0.1:8080/picture";
+const API_URL = "https://picture-wf73.onrender.com/picture";
 
 class PicServices {
   getAll(page) {
