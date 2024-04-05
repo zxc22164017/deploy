@@ -88,11 +88,11 @@ const Nav = ({ user, setUser }) => {
                   </Disclosure.Button>
                 </div>
 
-                <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="hidden md:flex items-center justify-center ">
                   <div className="flex flex-shrink-0 items-center">
                     <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      className="h-8 w-auto "
+                      src="/icon.png"
                       alt="Your Company"
                     />
                   </div>
@@ -152,7 +152,7 @@ const Nav = ({ user, setUser }) => {
                   <input
                     type="text"
                     name="search"
-                    className=" md:hidden px-12 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-full border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm"
+                    className=" md:hidden px-10 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-2/3 border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm sm:w-2"
                     placeholder="Search for meme"
                   />
                   <button

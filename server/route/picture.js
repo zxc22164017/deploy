@@ -72,7 +72,7 @@ router.get("/:_id", async (req, res) => {
   let { page } = req.query;
   try {
     let foundPic = await Picture.findOne({ _id: _id })
-      .populate("author", ["username", "profile", "subscriber"])
+      .populate("author", ["username", "profile", "follower"])
       .exec();
     let foundComments = await Comment.find({ post: _id })
       .populate("author", ["username", "profile"])

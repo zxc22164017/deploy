@@ -17,6 +17,7 @@ const Profile = ({ user, setUser }) => {
   let [item, setItem] = useState([]);
   let [loading, setLoading] = useState(false);
   let [error, setError] = useState(null);
+  let [follow, setFollow] = useState(false);
   let defaultProfile = "/default_profile.jpg";
   const fetchData = () => {
     setLoading(true);
@@ -38,6 +39,11 @@ const Profile = ({ user, setUser }) => {
   useEffect(() => {
     if (user) {
       if (idFromParams == user.user._id) setIsMe(true);
+      else {
+        user.user.subscriber.forEach((id) => {
+          id == idFromParams ? setFollow(true) : setFollow(false);
+        });
+      }
     }
     authServices
       .getUser(idFromParams)
@@ -69,8 +75,28 @@ const Profile = ({ user, setUser }) => {
       });
   };
   const followHandle = () => {
-    console.log("follow");
+    setFollow(!follow);
+    if (follow) {
+      authServices
+        .unFollow(idFromParams, user.user._id)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      authServices
+        .follow(idFromParams, user.user._id) //edit here
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
+  console.log(profile);
   return (
     profile && (
       <main className="flex flex-col justify-center items-center min-h-screen ">
@@ -125,9 +151,7 @@ const Profile = ({ user, setUser }) => {
           <h1 className="text-3xl font-family: ui-sans-serif font-bold">
             {profile.username}
           </h1>
-          <h2 className="text-gray-500">
-            {profile.subscriber.length} followers
-          </h2>
+          <h2 className="text-gray-500">{profile.follower.length} followers</h2>
           {isMe && user && (
             <button
               onClick={() => {
@@ -145,7 +169,7 @@ const Profile = ({ user, setUser }) => {
               }}
               className="mt-2 rounded-full bg-emerald-500 text-white w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
             >
-              Follow
+              {follow ? "Unfollow" : "Follow"}
             </button>
           )}
           <h1 className="mt-3 font-family: ui-sans-serif font-bold">

@@ -100,21 +100,47 @@ router.post("/login", async (req, res) => {
     }
   });
 });
-// router.post("/follow/:_id", async (req, res) => {
-//   try {
-//     let { _id } = req.params;
-//     let { userId } = req.body;
-//     let beFollowed = await User.findOne({ _id });
-//     let following = await User.findOne({ userId });
-//     beFollowed.follower.push(userId);
-//     following.subscriber.push(_id);
-//     let followedResult = await beFollowed.save();
-//     let followingResult = await following.save();
-//   } catch (e) {
-//     return res.status(500).send(e);
-//   }
-// }); //follow
-// router.delete("/follow/:id", (req, res) => {}); //unfollow
+router.post("/follow/:_id", async (req, res) => {
+  console.log("follow");
+  try {
+    let { _id } = req.params;
+    let { userId } = req.body;
+    let beFollowed = await User.findOne({ _id });
+    let following = await User.findOne({ _id: userId });
+    beFollowed.follower.push(userId);
+
+    following.subscriber.push(beFollowed);
+    let followedResult = await beFollowed.save();
+    let followingResult = await following.save();
+    return res.send({ followingResult, followedResult });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(e);
+  }
+}); //follow
+router.post("/unfollow/:_id", async (req, res) => {
+  console.log("unfollow");
+  try {
+    let { _id } = req.params;
+    let { userId } = req.body;
+    let beFollowed = await User.findOne({ _id: _id });
+    let following = await User.findOne({ _id: userId });
+
+    beFollowed.follower.forEach((followerID, index) => {
+      followerID === userId ? beFollowed.follower.splice(index, 1) : null;
+    });
+    following.subscriber.forEach((susID, index) => {
+      susID === _id ? following.subscriber.splice(index, 1) : null;
+    });
+
+    let beResult = await beFollowed.save();
+    let ingResult = await following.save();
+    return res.send({ beResult, ingResult });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(e);
+  }
+}); //unfollow
 
 router.patch(
   "/:_id",

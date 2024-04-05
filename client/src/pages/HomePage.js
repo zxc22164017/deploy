@@ -32,10 +32,11 @@ const HomePage = ({ user, setUser }) => {
         setLoading(false);
       });
   };
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-    fetchData();
-  }, []);
+  console.log(page);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0 });
+  //   fetchData();
+  // }, []);
 
   return (
     <main className="flex flex-col justify-center items-center min-h-screen">

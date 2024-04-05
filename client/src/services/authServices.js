@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const API_URL = "http://63f1-123-193-128-69.ngrok-free.app/user";
+// const API_URL = "http://127.0.0.1:8080/user";
 const API_URL = "https://picture-wf73.onrender.com/user";
 
 class PicServices {
@@ -38,6 +38,43 @@ class PicServices {
         "Content-type": "multipart/form-data",
       },
     });
+  }
+  follow(_id, userId) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    console.log(_id);
+    return axios.post(
+      API_URL + "/follow/" + _id,
+      { userId },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+  }
+
+  unFollow(_id, userId) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    console.log(_id);
+    return axios.post(
+      API_URL + "/unfollow/" + _id,
+      { userId },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
   }
 
   editProfile(id, username, email, password, gender) {

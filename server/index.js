@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRoute = require("./route").auth;
 const picRouter = require("./route").picture;
 const corsOptions = {
+  //deployment
   origin: "https://picturefront.onrender.com", // frontend URI (ReactJS)
 };
 mongoose
@@ -18,7 +19,8 @@ mongoose
     console.log(e);
   });
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); //delpoyment
+// app.use(cors()); //local test
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/user", authRoute);

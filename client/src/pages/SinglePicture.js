@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import pictureService from "../services/pictureService";
 import Comments from "../components/Comments";
 import Comfirm from "../components/Confirm";
+import authServices from "../services/authServices";
 
 const SinglePicture = ({ user, setUser }) => {
   let [msg, setMsg] = useState("");
@@ -22,6 +23,7 @@ const SinglePicture = ({ user, setUser }) => {
   let [reply, setReply] = useState("");
   let [like, setLike] = useState(false);
   let [show, setShow] = useState(false);
+  let [follow, setFollow] = useState(false);
   const fetchData = () => {
     setLoading(true);
     setError(null);
@@ -111,6 +113,29 @@ const SinglePicture = ({ user, setUser }) => {
   let editPic = () => {
     navigate(`/picture/${pictureId}/edit`);
   };
+  const followHandle = () => {
+    setFollow(!follow);
+    if (follow) {
+      authServices
+        .unFollow(pictureData.author._id, user.user._id)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      authServices
+        .follow(pictureData.author._id, user.user._id) //edit here
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
   return (
     pictureData && (
       <main className=" flex  justify-center h-full min-h-screen ">
@@ -150,11 +175,14 @@ const SinglePicture = ({ user, setUser }) => {
               </Link>
             </div>
             <div className="flex items-center flex-wrap mt-4 ">
-              <button className="text-white rounded-lg w-16 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:duration-0 active:bg-blue-700 active:shadow-lg active:scale-100  ">
-                follow
+              <button
+                onClick={followHandle}
+                className="text-white rounded-lg w-16 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:duration-0 active:bg-blue-700 active:shadow-lg active:scale-100  "
+              >
+                {follow ? "unfollow" : "follow"}
               </button>
               <h5 className="ml-3 text-zinc-500 ">
-                follower: {pictureData.author.subscriber.length}
+                follower: {pictureData.author.follower.length}
               </h5>
             </div>
 
