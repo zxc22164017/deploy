@@ -6,9 +6,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoute = require("./route").auth;
 const picRouter = require("./route").picture;
-
+const corsOptions = {
+  origin: "http://localhost:3000", // frontend URI (ReactJS)
+};
 mongoose
-  .connect("mongodb://127.0.0.1/memeDB")
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("connect to mongoDB successfully");
   })
@@ -16,12 +18,13 @@ mongoose
     console.log(e);
   });
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/user", authRoute);
 app.use("/picture", picRouter);
 
-app.listen(8080, () => {
-  console.log("server run on port 8080");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log("server run on port" + PORT);
 });
