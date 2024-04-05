@@ -7,7 +7,7 @@ const cors = require("cors");
 const authRoute = require("./route").auth;
 const picRouter = require("./route").picture;
 const corsOptions = {
-  origin: "http://localhost:3000", // frontend URI (ReactJS)
+  origin: "https://picturefront.onrender.com", // frontend URI (ReactJS)
 };
 mongoose
   .connect(process.env.MONGODB_URL)
