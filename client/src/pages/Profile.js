@@ -4,6 +4,7 @@ import authServices from "../services/authServices";
 import pictureService from "../services/pictureService";
 import Picture from "../components/Picture";
 import Loading from "../components/Loading";
+import Loading02 from "../components/Loading02";
 
 const Profile = ({ user, setUser }) => {
   let [profile, setProfile] = useState();
@@ -20,7 +21,6 @@ const Profile = ({ user, setUser }) => {
   let [follow, setFollow] = useState(false);
   let defaultProfile = "/default_profile.jpg";
   const fetchData = () => {
-    setLoading(true);
     setError(null);
     pictureService
       .getByUserId(idFromParams, page)
@@ -37,6 +37,7 @@ const Profile = ({ user, setUser }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (user) {
       if (idFromParams == user.user._id) setIsMe(true);
       else {
@@ -100,6 +101,7 @@ const Profile = ({ user, setUser }) => {
   return (
     profile && (
       <main className="flex flex-col justify-center items-center min-h-screen ">
+        {loading && <Loading02 />}
         <div className="w-2/3 flex flex-col items-center bg-white rounded-lg">
           <div className="flex w-full items-center justify-center mt-10">
             {isMe ? (
@@ -157,7 +159,7 @@ const Profile = ({ user, setUser }) => {
               onClick={() => {
                 nevigate(`/profile/${user.user._id}/edit`);
               }}
-              className="mt-2 rounded-full bg-emerald-500 text-white w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
+              className="mt-2 rounded-full bg-emerald-500 text-white w-1/3  md:w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
             >
               Edit Profile
             </button>

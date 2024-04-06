@@ -18,7 +18,7 @@ const Picture = (prop) => {
   }, []);
 
   return (
-    <div className=" mx-2 my-3 group bg-white border-1 border-gray-200 max-w-sm rounded md:max-w-64 max-h-min shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl hover:shadow-black/30">
+    <div className=" mx-2 my-3 group bg-white border-1 border-gray-200 max-w-sm rounded md:max-w-64 h-min shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl hover:shadow-black/30">
       <div
         onClick={() => {
           navigate(`/picture/${data._id}`);

@@ -137,7 +137,6 @@ router.post("/unfollow/:_id", async (req, res) => {
     let ingResult = await following.save();
     return res.send({ beResult, ingResult });
   } catch (e) {
-    console.log(e);
     return res.status(500).send(e);
   }
 }); //unfollow
@@ -174,6 +173,22 @@ router.patch(
     }
   }
 ); //update user
+router.post("/forget", async (req, res) => {
+  let { error } = loginValid(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  let { email, password } = req.body;
+
+  try {
+    let foundUser = await User.findOne({ email }).exec();
+    if (!foundUser) return res.status(400).send("user doesn't exist");
+    foundUser.password = password;
+    let result = await foundUser.save();
+    return res.send({ msg: "reseted", result });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(e);
+  }
+}); //forget password
 
 function fileFilter(file) {
   const allowFileTypes = ["image/png", "image/jpeg", "image/gif"];

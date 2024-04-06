@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import pictureService from "../services/pictureService";
 import { useNavigate } from "react-router-dom";
+import Loading02 from "../components/Loading02";
 
 const UploadPicture = ({ user, setUser }) => {
   let [msg, setMsg] = useState("");
+  let [loading, setLoading] = useState(false);
   let [uploadImg, setUploadImg] = useState();
   let [title, setTitle] = useState("");
   let [uploadFile, setuploadFile] = useState();
@@ -24,6 +26,7 @@ const UploadPicture = ({ user, setUser }) => {
   };
 
   let handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     pictureService
       .upload(uploadFile, title, description)
@@ -34,11 +37,15 @@ const UploadPicture = ({ user, setUser }) => {
       })
       .catch((e) => {
         setMsg(e.response.data);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
     <div className="px-4 py-20 flex item-center justify-center bg-gradient-to-b from-sky-200 to-fuchsia-200 w-screen h-screen">
+      {loading && <Loading02 />}
       {!user && (
         <h1 className="text-3xl text-center">
           You need to login to upload picture
@@ -86,11 +93,11 @@ const UploadPicture = ({ user, setUser }) => {
                       />
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span class="font-semibold">Click to upload</span> or drag
-                      and drop
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      PNG, JPG (MAX. 800x400px)
+                      PNG,GIF, JPG (MAX. 15MB)
                     </p>
                   </div>
                 )}
@@ -105,7 +112,7 @@ const UploadPicture = ({ user, setUser }) => {
               <input
                 onChange={changeTitle}
                 type="text"
-                className=" my-3.5 shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" my-3.5 shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-white dark:bg-black text-nowrap"
                 id="title"
                 placeholder="title"
               />
@@ -114,7 +121,7 @@ const UploadPicture = ({ user, setUser }) => {
             <div className="relative border-black mt-1">
               <label
                 htmlFor="description"
-                className=" absolute top-0 left-3.5 bg-white text-slate-500 dark:text-white"
+                className=" absolute top-0 left-3.5 bg-white text-slate-500 dark:text-white dark:bg-black text-nowrap"
               >
                 description
               </label>

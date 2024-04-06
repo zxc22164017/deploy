@@ -3,8 +3,8 @@ import React from "react";
 const About = () => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <div className="w-2/3 flex flex-col items-center bg-white rounded-lg">
-        <h1 className="font-bold text-6xl text-gray-900 my-2">
+      <div className="w-full md:w-2/3 flex flex-col items-center bg-white rounded-lg">
+        <h1 className="font-bold text-6xl text-gray-900 my-2 text-center">
           About This Project
         </h1>
         <p className="text-slate-500 p-3 text-center ">

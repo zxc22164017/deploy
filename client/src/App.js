@@ -12,6 +12,7 @@ import SinglePicture from "./pages/SinglePicture";
 import PageNotFound from "./pages/PageNotFound";
 import About from "./pages/About";
 import EditPicture from "./pages/EditPicture";
+import ForgetPassword from "./pages/ForgetPassword";
 
 function App() {
   const [user, setUser] = useState(authServices.getCurrentUser());
@@ -48,6 +49,7 @@ function App() {
           ></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/*" element={<PageNotFound />}></Route>
+          <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -123,7 +123,7 @@ const Nav = ({ user, setUser }) => {
                     type="text"
                     name="search"
                     className=" px-15 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-full border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm"
-                    placeholder="Search for meme"
+                    placeholder="Search"
                     onChange={inputHandle}
                   />
                   <button
@@ -152,7 +152,7 @@ const Nav = ({ user, setUser }) => {
                   <input
                     type="text"
                     name="search"
-                    className=" md:hidden px-10 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-2/3 border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm sm:w-2"
+                    className=" md:hidden mr-3 px-10 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-2/3 border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm sm:w-2"
                     placeholder="Search for meme"
                   />
                   <button
