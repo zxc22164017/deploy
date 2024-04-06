@@ -147,12 +147,12 @@ const Nav = ({ user, setUser }) => {
                     </svg>
                   </button>
                 </search>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className=" inset-y-0 right-0 flex items-center justify-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* smart phone search */}
                   <input
                     type="text"
                     name="search"
-                    className=" md:hidden mr-3 px-10 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-2/3 border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm sm:w-2"
+                    className=" md:hidden ml-8 mr-3 px-10 py-3 placeholder:italic placeholder:text-slate-400 block bg-gray-200 w-1/2 border border-slate-300 rounded-md pl-2 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-950 focus:ring-2 sm:text-sm sm:w-2"
                     placeholder="Search for meme"
                   />
                   <button
