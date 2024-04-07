@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoute = require("./route").auth;
 const picRouter = require("./route").picture;
-// const corsOptions = {
-//   //deployment
-//   origin: "https://picturefront.onrender.com", // frontend URI (ReactJS)
-// };
+const corsOptions = {
+  //deployment
+  origin: "https://picturefront.onrender.com", // frontend URI (ReactJS)
+};
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
@@ -19,8 +19,8 @@ mongoose
     console.log(e);
   });
 
-// app.use(cors(corsOptions)); //delpoyment
-app.use(cors()); //local test
+app.use(cors(corsOptions)); //delpoyment
+// app.use(cors()); //local test
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/user", authRoute);
