@@ -4,26 +4,27 @@ import pictureService from "../services/pictureService";
 import Comments from "../components/Comments";
 import Comfirm from "../components/Confirm";
 import authServices from "../services/authServices";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const SinglePicture = ({ user, setUser }) => {
-  let [msg, setMsg] = useState("");
-  let navigate = useNavigate();
-  let { pictureId } = useParams();
-  let [isMe, setIsMe] = useState(false);
-  let [hasProfile, setHasProfile] = useState(false);
-  let [profileImg, setProfileImg] = useState();
-  let [pictureData, setPictureData] = useState();
-  let [pictureImg, setPictureImg] = useState();
-  let [page, setPage] = useState(1);
-  let [comment, setComment] = useState([]);
-  let [loading, setLoading] = useState(false);
-  let [error, setError] = useState(null);
-  let [userProfile, setUserProfile] = useState();
-  let defaultProfile = "/default_profile.jpg";
-  let [reply, setReply] = useState("");
-  let [like, setLike] = useState(false);
-  let [show, setShow] = useState(false);
-  let [follow, setFollow] = useState(false);
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+  const { pictureId } = useParams();
+  const [isMe, setIsMe] = useState(false);
+  const [hasProfile, setHasProfile] = useState(false);
+  const [profileImg, setProfileImg] = useState();
+  const [pictureData, setPictureData] = useState();
+  const [pictureImg, setPictureImg] = useState();
+  const [page, setPage] = useState(1);
+  const [comment, setComment] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [userProfile, setUserProfile] = useState();
+  const defaultProfile = "/default_profile.jpg";
+  const [reply, setReply] = useState("");
+  const [like, setLike] = useState(false);
+  const [show, setShow] = useState(false);
+  const [follow, setFollow] = useState(false);
   const fetchData = () => {
     setLoading(true);
     setError(null);
@@ -85,7 +86,7 @@ const SinglePicture = ({ user, setUser }) => {
       });
   };
 
-  let heartHandle = () => {
+  const heartHandle = () => {
     if (like) {
       pictureService
         .dislike(pictureId)
@@ -107,10 +108,10 @@ const SinglePicture = ({ user, setUser }) => {
     }
     setLike(!like);
   };
-  let deletePic = () => {
+  const deletePic = () => {
     setShow(true);
   };
-  let editPic = () => {
+  const editPic = () => {
     navigate(`/picture/${pictureId}/edit`);
   };
   const followHandle = () => {
@@ -140,16 +141,17 @@ const SinglePicture = ({ user, setUser }) => {
     pictureData && (
       <main className=" flex  justify-center h-full min-h-screen ">
         <header className=" md:flex md:flex-row max-h-svh max-w-6xl content-stretch justify-stretch  ">
-          <aside className="min-w-1/4 md:w-96   bg-white md:rounded-l-xl  flex flex-col p-3 basis-1/3">
+          <aside className="min-w-1/4 md:w-96   bg-white md:rounded-l-xl  flex flex-col p-3 basis-1/3 border-2">
             <div className="py-10 mb5">
-              <h1 className="text-4xl font-bold text-emerald-700 dark:text-whit">
+              <h1 className="text-4xl font-bold text-gray-700 dark:text-whit animate-fade-right animate-once animate-duration-500 animate-ease-in">
                 {pictureData.title}
               </h1>
             </div>
-            <div className="flex items-center flex-wrap ">
+            <div className="flex items-center flex-wrap  animate-fade-right animate-once animate-duration-500 animate-delay-300 animate-ease-in ">
               {" "}
               {hasProfile ? (
-                <img
+                <LazyLoadImage
+                  loading="eager"
                   onClick={() => {
                     navigate(`/profile/${pictureData.author._id}`);
                   }}
@@ -158,7 +160,8 @@ const SinglePicture = ({ user, setUser }) => {
                   className="w-12 h-12  rounded-full mx-2 inline-block hover:cursor-pointer hover:border-2 hover:border-slate-500 transition ease-in-out delay-150 hover:scale-110"
                 />
               ) : (
-                <img
+                <LazyLoadImage
+                  loading="eager"
                   onClick={() => {
                     navigate(`/profile/${pictureData.author._id}`);
                   }}
@@ -174,7 +177,7 @@ const SinglePicture = ({ user, setUser }) => {
                 {pictureData.author.username}
               </Link>
             </div>
-            <div className="flex items-center flex-wrap mt-4 ">
+            <div className="flex items-center flex-wrap mt-4 animate-fade-right animate-once animate-duration-500 animate-delay-500 animate-ease-in ">
               <button
                 onClick={followHandle}
                 className="text-white rounded-lg w-16 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:duration-0 active:bg-blue-700 active:shadow-lg active:scale-100  "
@@ -186,7 +189,7 @@ const SinglePicture = ({ user, setUser }) => {
               </h5>
             </div>
 
-            <div className="flex mt-2 ">
+            <div className="flex mt-2  animate-fade-right animate-once animate-duration-500 animate-delay-500 animate-ease-in">
               {user && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +197,7 @@ const SinglePicture = ({ user, setUser }) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke={like ? "red" : "currentColor"}
-                  className="w-6 h-6 hover:w-7 hover:h-7 hover:cursor-pointer active:w-6 active-h-6 active:bg-red  "
+                  className="w-6 h-6 hover:w-7 hover:h-7 hover:cursor-pointer active:w-6 active-h-6 active:bg-red hover:animate-wiggle hover:animate-infinite  "
                   onClick={heartHandle}
                 >
                   <path
@@ -239,28 +242,32 @@ const SinglePicture = ({ user, setUser }) => {
                 </div>
               )}
             </div>
-            <div className="mt-5">
-              <h1 className="text-lg mb-2 text-zinc-700">Description:</h1>
-              <p className="text-zinc-500 text-pretty  truncate hover:text-nowrap">
+            <div className="mt-5 animate-fade-right animate-once animate-duration-500 animate-delay-700 animate-ease-in-out">
+              <h1 className="text-lg mb-2 text-zinc-700 border-b-2">
+                Description:
+              </h1>
+              <p className="text-zinc-500 text-pretty  truncate hover:text-nowrap ">
                 {pictureData.description}
               </p>
             </div>
           </aside>
-          <section className="min-w-1/2  bg-white  basis-1/2 flex justify-items-center align-center ">
-            <img
+          <section className="min-w-1/2  bg-white  basis-1/2 flex justify-items-center align-center  animate-fade-down animate-once animate-duration-500 animate-ease-in-out">
+            <LazyLoadImage
               className="w-full h-auto max-w-6xl object-contain object-scale-down rounded-lg"
               src={pictureImg}
               alt="picture"
             />
           </section>
-          <aside className="min-w-1/4 md:w-96 bg-white  md:rounded-r-xl basis-1/3 p-3 relative z-0">
+          <aside className="min-w-1/4 md:w-96 bg-white  md:rounded-r-xl basis-1/3 p-3 relative z-0 border-2 ">
             {msg && (
               <div className="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3">
                 <p className="font-bold">{msg}</p>
               </div>
             )}
-            <h1 className="text-lg mb-2 text-zinc-700">Comment:</h1>
-            <div className="flex flex-col ">
+            <h1 className="text-lg mb-2 text-zinc-700 animate-fade-left animate-once animate-duration-500 animate-delay-300 animate-ease-in-out">
+              Comment:
+            </h1>
+            <div className="flex flex-col  ">
               {comment &&
                 comment.map((item) => {
                   return <Comments item={item} key={item._id} />;
@@ -271,13 +278,13 @@ const SinglePicture = ({ user, setUser }) => {
                 <div className="flex-shrink-0">
                   {" "}
                   {userProfile ? (
-                    <img
+                    <LazyLoadImage
                       src={userProfile}
                       alt="profile"
                       className="w-8 h-8  rounded-full mx-2 inline-block hover:cursor-pointer hover:border-2 hover:border-slate-500 transition ease-in-out delay-150 hover:scale-110"
                     />
                   ) : (
-                    <img
+                    <LazyLoadImage
                       src="/default_profile.jpg"
                       alt="profile"
                       className="w-8 h-8  rounded-full mx-2 inline-block hover:cursor-pointe hover:border-2 hover:border-slate-500 transition ease-in-out delay-150 hover:scale-110"

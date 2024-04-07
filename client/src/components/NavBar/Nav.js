@@ -67,10 +67,7 @@ const Nav = ({ user, setUser }) => {
 
   return (
     <div className="sticky top-0 z-50">
-      <Disclosure
-        as="nav"
-        className="bg-gradient-to-r from-cyan-950 via-green-500 via-65% to-teal-700 sticky top-0"
-      >
+      <Disclosure as="nav" className="bg-slate-700 sticky top-0">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -90,11 +87,7 @@ const Nav = ({ user, setUser }) => {
 
                 <div className="hidden md:flex items-center justify-center ">
                   <div className="flex flex-shrink-0 items-center">
-                    <img
-                      className="h-8 w-auto "
-                      src="/icon.png"
-                      alt="Your Company"
-                    />
+                    <img className="h-8 w-auto " src="/icon.png" alt="logo" />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
@@ -129,14 +122,14 @@ const Nav = ({ user, setUser }) => {
                   <button
                     id="search"
                     onClick={searchHandle}
-                    className="hover:bg-white hover:border hover:border-slate-300 hover:rounded-md active:border-slate-500 active:bg-slate-500"
+                    className=" hover:border hover:border-slate-300 hover:rounded-md active:border-slate-500 active:bg-slate-500"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
-                      stroke="currentColor"
+                      stroke="white"
                       className="w-6 h-6 mx-1"
                     >
                       <path

@@ -10,7 +10,7 @@ const Comments = ({ item }) => {
   }, []);
 
   return (
-    <div className="flex space-x-4 border-b-2 border-gray-300 ">
+    <div className="flex space-x-4 border-b-2 border-gray-300 animate-fade-left animate-once animate-duration-500 animate-delay-500 animate-ease-in-out ">
       <div className="flex-shrink-0">
         {userProfile ? (
           <img

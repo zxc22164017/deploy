@@ -3,27 +3,27 @@ import authServices from "../services/authServices";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditProfile = ({ user, setUser }) => {
-  let [username, setUsername] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [confirm, setConfirm] = useState("");
-  let [gender, setGender] = useState("");
-  let [msg, setMsg] = useState("");
-  let navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [gender, setGender] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
-  let changeUsername = (e) => {
+  const changeUsername = (e) => {
     setUsername(e.target.value);
   };
-  let changeEmail = (e) => {
+  const changeEmail = (e) => {
     setEmail(e.target.value);
   };
-  let changePassword = (e) => {
+  const changePassword = (e) => {
     setPassword(e.target.value);
   };
-  let changConfirm = (e) => {
+  const changConfirm = (e) => {
     setConfirm(e.target.value);
   };
-  let changGender = (e) => {
+  const changGender = (e) => {
     setGender(e.target.value);
   };
   useEffect(() => {

@@ -4,6 +4,7 @@ const Comment = require("../models").Comment;
 const multer = require("multer");
 const { User } = require("../models");
 const storage = multer.memoryStorage();
+const sharp = require("sharp");
 const upload = multer({
   storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 },
@@ -26,18 +27,22 @@ router.post("/", upload.single("img"), async (req, res) => {
     data: req.file.buffer,
     contentType: req.file.mimetype,
   };
-  let newPic = new Picture({
-    id: req.user._id,
-    picture: newImg,
-    author: req.user._id,
-    title: title,
-    description: description,
-    tag: tag,
-  });
   try {
+    const bufferData = await sharp(newImg.data);
+    console.log(bufferData);
+    let newPic = new Picture({
+      id: req.user._id,
+      picture: newImg,
+      author: req.user._id,
+      title: title,
+      description: description,
+      tag: tag,
+    });
+
     let save = await newPic.save();
     return res.send("picture post successfully");
   } catch (e) {
+    console.log(e);
     return res.status(500).send(e);
   }
 }); //post picture

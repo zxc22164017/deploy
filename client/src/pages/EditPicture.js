@@ -3,12 +3,12 @@ import pictureService from "../services/pictureService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditPicture = ({ user, setUser }) => {
-  let { pictureId } = useParams();
-  let [msg, setMsg] = useState("");
-  let [uploadImg, setUploadImg] = useState();
+  const { pictureId } = useParams();
+  const [msg, setMsg] = useState("");
+  const [uploadImg, setUploadImg] = useState();
 
-  let [title, setTitle] = useState("");
-  let [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
   const fetchData = () => {
     pictureService
@@ -23,14 +23,14 @@ const EditPicture = ({ user, setUser }) => {
       .catch((e) => {});
   };
 
-  let changeTitle = (e) => {
+  const changeTitle = (e) => {
     setTitle(e.target.value);
   };
-  let changeDescription = (e) => {
+  const changeDescription = (e) => {
     setDescription(e.target.value);
   };
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     pictureService
       .editPicture(pictureId, title, description)

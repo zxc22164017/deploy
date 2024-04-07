@@ -1,6 +1,6 @@
 import axios from "axios";
-// const API_URL = "http://127.0.0.1:8080/picture"; //local test
-const API_URL = "https://picture-wf73.onrender.com/picture"; //deployment
+const API_URL = "http://127.0.0.1:8080/picture"; //local test
+// const API_URL = "https://picture-wf73.onrender.com/picture"; //deployment
 
 class PicServices {
   getAll(page) {

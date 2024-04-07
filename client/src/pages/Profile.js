@@ -5,21 +5,22 @@ import pictureService from "../services/pictureService";
 import Picture from "../components/Picture";
 import Loading from "../components/Loading";
 import Loading02 from "../components/Loading02";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Profile = ({ user, setUser }) => {
-  let [profile, setProfile] = useState();
-  let nevigate = useNavigate();
-  let [isMe, setIsMe] = useState(false);
-  let [uploadImg, setUploadImg] = useState();
-  let { idFromParams } = useParams();
-  let [hasProfile, setHasProfile] = useState(false);
-  let [profileImg, setProfileImg] = useState();
-  let [page, setPage] = useState(1);
-  let [item, setItem] = useState([]);
-  let [loading, setLoading] = useState(false);
-  let [error, setError] = useState(null);
-  let [follow, setFollow] = useState(false);
-  let defaultProfile = "/default_profile.jpg";
+  const [profile, setProfile] = useState();
+  const nevigate = useNavigate();
+  const [isMe, setIsMe] = useState(false);
+  const [uploadImg, setUploadImg] = useState();
+  const { idFromParams } = useParams();
+  const [hasProfile, setHasProfile] = useState(false);
+  const [profileImg, setProfileImg] = useState();
+  const [page, setPage] = useState(1);
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [follow, setFollow] = useState(false);
+  const defaultProfile = "/default_profile.jpg";
   const fetchData = () => {
     setError(null);
     pictureService
@@ -101,20 +102,19 @@ const Profile = ({ user, setUser }) => {
   return (
     profile && (
       <main className="flex flex-col justify-center items-center min-h-screen ">
-        {loading && <Loading02 />}
-        <div className="w-2/3 flex flex-col items-center bg-white rounded-lg">
+        <div className="animate-fade-down animate-once animate-duration-500 animate-ease-in animate-normal animate-fill-forwards w-2/3 flex flex-col items-center bg-white rounded-lg">
           <div className="flex w-full items-center justify-center mt-10">
             {isMe ? (
               <div className="border-2 border-gray-800 w-1/5 h-1/5 rounded-full bg-gray-500 group flex flex-col hover:opacity-60">
                 <label htmlFor="upload file">
                   {hasProfile ? (
-                    <img
+                    <LazyLoadImage
                       className="max-w-full max-h-full aspect-square rounded-full bg-gray-500 cursor-pointer"
                       src={uploadImg ? uploadImg : profileImg}
                       alt="your profile"
                     />
                   ) : (
-                    <img
+                    <LazyLoadImage
                       className="max-w-full max-h-full aspect-square rounded-full bg-gray-500 cursor-pointer"
                       src={uploadImg ? uploadImg : defaultProfile}
                       alt="default profile"
@@ -134,13 +134,13 @@ const Profile = ({ user, setUser }) => {
               <div className="border-2 border-gray-800 w-1/5 h-1/5 rounded-full bg-gray-500 group flex flex-col ">
                 <label htmlFor="upload file">
                   {hasProfile ? (
-                    <img
+                    <LazyLoadImage
                       className="max-w-full max-h-full aspect-square rounded-full bg-gray-500 cursor-pointer"
                       src={profileImg}
                       alt="your profile"
                     />
                   ) : (
-                    <img
+                    <LazyLoadImage
                       className="max-w-full max-h-full aspect-square rounded-full bg-gray-500 cursor-pointer"
                       src={defaultProfile}
                       alt="default profile"
@@ -159,7 +159,7 @@ const Profile = ({ user, setUser }) => {
               onClick={() => {
                 nevigate(`/profile/${user.user._id}/edit`);
               }}
-              className="mt-2 rounded-full bg-emerald-500 text-white w-1/3  md:w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
+              className="active:animate-jump mt-2 rounded-full bg-emerald-500 text-white w-1/3  md:w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
             >
               Edit Profile
             </button>
@@ -169,7 +169,7 @@ const Profile = ({ user, setUser }) => {
               onClick={() => {
                 followHandle();
               }}
-              className="mt-2 rounded-full bg-emerald-500 text-white w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
+              className="active:animate-jump mt-2 rounded-full bg-emerald-500 text-white w-1/5 h-10 hover:bg-emerald-700 active:bg-emerald-900"
             >
               {follow ? "Unfollow" : "Follow"}
             </button>

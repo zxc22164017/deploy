@@ -10,6 +10,23 @@ module.exports = {
           "0 0px 65px rgba(255, 255,255, 0.2)",
         ],
       },
+      Keyframes: {
+        unfold: {
+          "0%": { transform: "scaleY(.005);", transform: "scaleX(0)" },
+          "50%": {
+            transform: "scaleY(.005);",
+            transform: "scaleX(1);",
+          },
+          " 100%": {
+            transform: "scaleY(1);",
+            transform: "scaleX(1);",
+          },
+        },
+      },
+      animation: {
+        unfold: "unfold 1s linear 1",
+        fold: "fold 1s linear 1",
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
@@ -22,5 +39,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };

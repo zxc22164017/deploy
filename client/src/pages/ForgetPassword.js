@@ -3,20 +3,20 @@ import authServices from "../services/authServices";
 import { useNavigate } from "react-router-dom";
 
 const ForgetPassword = () => {
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [confirm, setConfirm] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
 
-  let [msg, setMsg] = useState("");
-  let navigate = useNavigate();
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
-  let changeEmail = (e) => {
+  const changeEmail = (e) => {
     setEmail(e.target.value);
   };
-  let changePassword = (e) => {
+  const changePassword = (e) => {
     setPassword(e.target.value);
   };
-  let changConfirm = (e) => {
+  const changConfirm = (e) => {
     setConfirm(e.target.value);
   };
 

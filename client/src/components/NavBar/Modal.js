@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import authServices from "../../services/authServices";
 
 const Modal = (props) => {
-  let { show, setShow, user, setUser } = props;
+  const { show, setShow, user, setUser } = props;
 
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [msg, setMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
   const changeEmail = (e) => {
     setEmail(e.target.value);
@@ -41,7 +41,7 @@ const Modal = (props) => {
     show &&
     createPortal(
       <>
-        <div className="fixed inset-0 z-10 overflow-y-auto">
+        <div className="fixed inset-0 z-10 overflow-y-auto animate-flip-down animate-once animate-delay-300 animate-ease-in-out">
           <div
             className="fixed inset-0 w-full h-full bg-black opacity-40"
             onClick={() => setShow(false)}
@@ -107,7 +107,7 @@ const Modal = (props) => {
                 </Link>
                 <button
                   onClick={loginHandler}
-                  className="rounded-md bg-lime-500 py-3 mt-4 hover:bg-lime-600 active:bg-lime-700"
+                  className="rounded-md bg-lime-500 py-3 mt-4 hover:bg-lime-600 active:bg-lime-700 active:animate-jump"
                 >
                   Login
                 </button>
@@ -116,7 +116,7 @@ const Modal = (props) => {
                   onClick={() => {
                     setShow(false);
                   }}
-                  className="rounded-md bg-lime-500 mt-4 hover:bg-lime-600 active:bg-lime-700"
+                  className="rounded-md bg-lime-500 mt-4 hover:bg-lime-600 active:bg-lime-700 active:animate-jump"
                 >
                   <Link to="/register" className="block h-full py-3">
                     Signup for Free

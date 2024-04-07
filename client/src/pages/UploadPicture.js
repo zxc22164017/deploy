@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 import Loading02 from "../components/Loading02";
 
 const UploadPicture = ({ user, setUser }) => {
-  let [msg, setMsg] = useState("");
-  let [loading, setLoading] = useState(false);
-  let [uploadImg, setUploadImg] = useState();
-  let [title, setTitle] = useState("");
-  let [uploadFile, setuploadFile] = useState();
-  let [description, setDescription] = useState("");
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [uploadImg, setUploadImg] = useState();
+  const [title, setTitle] = useState("");
+  const [uploadFile, setuploadFile] = useState();
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
-  let changeTitle = (e) => {
+  const changeTitle = (e) => {
     setTitle(e.target.value);
   };
-  let changeDescription = (e) => {
+  const changeDescription = (e) => {
     setDescription(e.target.value);
   };
 
@@ -25,7 +25,7 @@ const UploadPicture = ({ user, setUser }) => {
     }
   };
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     pictureService

@@ -3,27 +3,27 @@ import authServices from "../services/authServices";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  let [username, setUsername] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [confirm, setConfirm] = useState("");
-  let [gender, setGender] = useState("");
-  let [msg, setMsg] = useState("");
-  let navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [gender, setGender] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
-  let changeUsername = (e) => {
+  const changeUsername = (e) => {
     setUsername(e.target.value);
   };
-  let changeEmail = (e) => {
+  const changeEmail = (e) => {
     setEmail(e.target.value);
   };
-  let changePassword = (e) => {
+  const changePassword = (e) => {
     setPassword(e.target.value);
   };
-  let changConfirm = (e) => {
+  const changConfirm = (e) => {
     setConfirm(e.target.value);
   };
-  let changGender = (e) => {
+  const changGender = (e) => {
     setGender(e.target.value);
   };
   useEffect(() => {
@@ -32,7 +32,7 @@ const Register = () => {
       : setMsg("");
   }, [password, confirm]);
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (msg == "")
       authServices
@@ -49,7 +49,7 @@ const Register = () => {
 
   return (
     <div className="px-4 py-20 flex item-center justify-center bg-gradient-to-b from-sky-200 to-fuchsia-200 w-screen min-h-screen">
-      <form className="relative w-full max-w-sm p-10 h-max mx-auto bg-white rounded-md shadow-lg">
+      <form className="relative w-full max-w-sm p-10 h-max mx-auto bg-white rounded-md shadow-lg animate-unfold">
         {msg && (
           <div className="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3">
             <p className="font-bold">{msg}</p>

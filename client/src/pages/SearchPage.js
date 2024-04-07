@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const SearchPage = () => {
-  let { keyword } = useParams();
+  const { keyword } = useParams();
 
-  let [page, setPage] = useState(1);
-  let [item, setItem] = useState([]);
-  let [loading, setLoading] = useState(false);
-  let [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchData = () => {
     setLoading(true);
